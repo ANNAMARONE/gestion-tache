@@ -1,0 +1,244 @@
+/* On fait en sorte que chaque élément contienne sa marge interne avec box-sizing et on retire les traits qui sont par défaut sur les liens */
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+  }
+  
+  /* On modernise notre balise de navigation avec une petite ombre. On mets tous les éléments du menu les uns bien à côté des autres avec flexbox (display: flex) */
+  nav {
+    background-color: #fff;
+    padding: 0 20px;
+    border-radius: 40px;
+    box-shadow: 0 10px 40px rgba(159, 162, 177, .8);
+    display: flex;
+    overflow: hidden;
+    overflow-x: auto;
+    position: relative;
+  }
+  
+  /* On stylise chaque élément */
+  .nav-item {
+    color: #83818c;
+    font-family: arial, sans-serif;
+    padding: 20px;
+    margin: 0 6px;
+    position: relative;
+  }
+  
+  /* Ici on met juste un petit élément avant chaque élément pour le rendre plus beau visuellement */
+  .nav-item:before {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    background-color: #dfe2ea;
+    height: 5px;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    left: 0;
+    transition: .3s;
+  }
+  
+  /* Avec les dernières nouveautés de CSS, on peut changer les propriétés des éléments selon des conditions avec not */
+  .nav-item:not(.is-active):hover:before {
+    bottom: 0;
+  }
+  .nav-item:not(.is-active):hover {
+    color: #333;
+  }
+  
+  /* Stylisons notre indicateur */
+  .nav-indicator {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 5px;
+    transition: .4s;
+    border-radius: 8px 8px 0 0;
+  }
+  /* partie body */
+  .imageperso{
+    width: 20%;
+  
+    margin-top: 5%;
+    border-radius: 100%;
+    margin-left: 5%;
+
+  }
+  .top{
+    background-image: url(images/espace.png);
+  margin-top: 5%;
+  display: flex;
+
+  }
+  .top h1{
+    color: white;
+    margin-left: 20%;
+    margin-top: 5%;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  @keyframes monAnimation {
+    0% {
+      font-size: 24px; /* Taille initiale */
+      opacity: 0; /* Opacité initiale (invisible) */
+    }
+    100% {
+      font-size: 36px; /* Taille finale */
+      opacity: 1; /* Opacité finale (visible) */
+    }
+  }
+  
+  /* Appliquer l'animation à l'élément <h1> */
+  .top h1 {
+    animation-name: monAnimation; /* Nom de l'animation */
+    animation-duration: 5s; /* Durée de l'animation (2 secondes) */
+    animation-timing-function: ease-in-out; /* Fonction de minutage (facilement accéléré et ralenti) */
+    animation-iteration-count: infinite; /* Répéter l'animation indéfiniment */
+  }
+  .form1{
+    margin-top: 5%;
+  }
+  fieldset{
+    background-color: #1E5389;
+    color: #fff;
+   width: 100%;
+
+  }
+  .créercompt{
+    display: flex;
+  }
+  .compt{
+   text-align: center;
+  }
+  .traite1{
+    width: 10%;
+    border: 5px solid white;
+   margin: 0px auto;
+  }
+  .form2{
+    display: flex;
+    
+    margin-top: 5%;
+  }
+  .traite2{
+    height: 20rem;
+    border: 2px solid #000207;
+    
+   
+  }
+  .descrip{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: italic;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .descrip li{
+    margin-bottom: 10px
+  }
+  .champ{
+    margin-left: 3%;
+  }
+  .nomutil{
+    display: flex;
+  }
+  input[type=text], select {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  input[type=email], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input[type=passeword], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+  /* formulaire numero 2 */
+  .form3 input {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  
+
+  
+ .form3{
+    margin-top: 5%;
+ }
+  
+  .containers {
+    padding: 16px;
+  }
+  
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+  }
+  
+  
