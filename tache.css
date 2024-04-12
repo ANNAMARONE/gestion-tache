@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+  }
+  body{
+    background-color: #000207;
+  }
+  .container{
+    background-color: white;
+    margin-top: 5%;
+    height: 70rem;
+  }
+  .top{
+    padding-top: 2%;
+    margin-left: 5%;
+
+  }
+  .top h1{
+    font-weight: bolder;
+    font-size: 40px;
+    font-style: italic;
+  }
+  .traite{
+    width: 95%;
+    border: 2px solid black;
+    margin-right: 5%;
+  }
+  /* premier partie de la formulaire */
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width: 10%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 10px auto;
+    border: 2px solid white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+    font-size: 18px;
+  }
+  
+   .from1{
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  form{
+    margin-top: 3%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .tache label{
+    font-size: 18px;
+    font-weight: bolder;
+  }
+  .tache h1{
+    margin: 5px;
+    font-style: unset;
+    color: #000207;
+    font-style: oblique;
+    background-color: #000207;
+    color: white;
+  }
+  .tache{
+    border:3px solid #000207;
+  }
+  /* partie formulaire2 */
+  .form2{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .membre h1{
+    font-style: oblique;
+    background-color: #000207;
+    color: white;
+  }
+  .membre input{
+    width: 30rem;
+  }
+  .date{
+   margin-right: 15%;
+  
+  }
+  .date h1{
+    font-style: oblique;
+    background-color: #000207;
+    color: white;
+  }
+ .date input{
+    width: 20rem;
+ }
+ .datecreation{
+    margin: 10px;
+    background-color:#1E5389;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    color: white;
+ }
+ .datelimite{
+    margin: 10px;
+    background-color:rgb(173, 10, 10);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+ }
