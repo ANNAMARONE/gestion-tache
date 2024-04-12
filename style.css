@@ -187,7 +187,7 @@
   }
   /* formulaire numero 2 */
   .form3 input {
-    width: 80%;
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -195,14 +195,26 @@
     box-sizing: border-box;
   }
   
-  button {
-    background-color: #04AA6D;
+  .button {
+    background-color:  #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    margin-left: 40%;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+   
+  }
+  .cancelbtn {
+   
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
     width: 50%;
+ 
   }
   
   button:hover {
@@ -219,6 +231,14 @@
   
  .form3{
     margin-top: 5%;
+    margin-left: 5%;
+ }
+ .form3 h2{
+  margin-left: 20%;
+  color:  #000207;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 30px;
  }
   
   .containers {
