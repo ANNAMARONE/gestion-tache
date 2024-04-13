@@ -40,7 +40,8 @@ if(isset($_POST["submit"])){
     }else{
         $db=new Createtache();
         $db->create($Titre,$Description,$Priorite, $DateCreation, $DateLimite, $Statut, $Assignee, $Createur, $Etiquettes);
-        echo"tache ajouter avec succés";
+        header('location:read.php');
+        exit();
       
     }
 }
@@ -139,7 +140,7 @@ if(isset($_POST["submit"])){
     <select name="Statut" id="statut">
         <option value="a faire">A faire</option>
         <option value="en cours">En cours</option>
-        <option value="terminnee">Treminer</option>
+        <option value="terminee">Treminer</option>
     </select>
                 </div>
                 <div>
