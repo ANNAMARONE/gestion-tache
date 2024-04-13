@@ -1,3 +1,60 @@
+<?php
+require_once('config.php');
+class Createtache extends Database{
+    function create($Titre,$Description,$Priorite, $DateCreation, $DateLimite, $Statut, $Assignee, $Createur, $Etiquettes){
+   
+    $sql="INSERT INTO `Taches`(`Titre`, `Description`, `Priorite`, `DateCreation`, `DateLimite`, `Statut`, `Assignee`, `Createur`, `Etiquettes`) VALUES 
+    (:Titre, :Description,:Priorite,:DateCreation,:DateLimite,:Statut,:Assignee,:Createur,:Etiquettes)";
+    $stmt=$this->conn->prepare($sql);
+    $stmt->bindvalue(':Titre',$Titre);
+    $stmt->bindvalue(':Description',$Description);
+    $stmt->bindvalue(':Priorite',$Priorite);
+    $stmt->bindvalue(':DateCreation',$DateCreation);
+    $stmt->bindvalue(':DateLimite',$DateLimite);
+    $stmt->bindvalue(':Statut',$Statut);
+    $stmt->bindvalue(':Assignee',$Assignee);
+    $stmt->bindvalue(':Createur',$Createur);
+    $stmt->bindvalue(':Etiquettes',$Etiquettes);
+    $stmt->execute();
+     }
+     function readUtilis() {
+        try{
+           $sql="SELECT * FROM Utilisateurs" ;
+    
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+           
+            return $result;
+        } catch(PDOException $e){
+            echo"une erreur est survenu".$e->getMessage();
+        }
+        
+    }
+}
+if(isset($_POST["submit"])){
+    extract($_POST);
+   
+    if(empty($Titre)|| empty($Description) || empty($Priorite)|| empty($DateCreation) || empty($DateLimite) || empty($Statut) || empty($Assignee) || empty($Createur) || empty($Etiquettes) ){
+        echo "<p>** tout les champs sont obligatoire</p>";
+    }else{
+        $db=new Createtache();
+        $db->create($Titre,$Description,$Priorite, $DateCreation, $DateLimite, $Statut, $Assignee, $Createur, $Etiquettes);
+        echo"tache ajouter avec succés";
+      
+    }
+}
+
+?>;
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +70,7 @@
             <p> créer de nouvelles tâches et voir les détails de chaque tâche créée</p>
             <div class="traite"></div>
         </div>
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             <fieldset class="tache">
               <h1> Details de la tâche</h1> 
                 <div class="from1">
@@ -29,21 +86,49 @@
                 <label for="Titre">Etiquettes:</label>
                 <input type="text" value="" name="Etiquettes" >
                 </div>
-                <div>
-                <label for="Titre">Fichiers Attaches:</label>
-                <input type="text" value="" name="FichiersAttaches">
-                </div>
+                
                 </div>
                 <div class="form2">
                         <div class="membre">
                             <h1>Membres</h1>
                 <div>
                 <label for="Titre">Createur:</label>
-                <input type="text" value="" name="Createur" class="membre1">
+                <select class="form-control" id="Createur" name="Createur" required>
+            <?php
+            require_once('config.php');
+            $result=new Createtache();
+            $utilisateurs=$result->readUtilis ();
+            ?>
+            <?php 
+              foreach($utilisateurs as $utilisateur){?>
+                <option value="<?= $utilisateur['Id']?>"><?= $utilisateur['Prenom']?> <?= $utilisateur['Nom']?></option>
+                <?php
+              
+            }
+
+            ?>   <!-- Ajoutez d'autres options ici si nécessaire -->
+            </select>
                 </div>
                 <div>
                 <label for="Titre">Assignee:</label>
-                <input type="text" value="" name="Assignee" class="membre1">
+                <select class="form-control" id="Assignee" name="Assignee" required>
+            <?php
+            require_once('config.php');
+            $result=new Createtache ();
+            $utilisateurs=$result->readUtilis();
+            ?>
+            <?php 
+              foreach($utilisateurs as $utilisateur){?>
+                <option value="<?= $utilisateur['Id']?>"><?= $utilisateur['Prenom']?> <?= $utilisateur['Nom']?></option>
+                <?php
+              
+            }
+
+            ?>
+              
+              
+                <!-- Ajoutez d'autres options ici si nécessaire -->
+            </select>
                 </div>
                
                         </div>
@@ -76,7 +161,7 @@
 
                         </div>
                 </div>
-                <input type="submit" value="Submit">
+                <input type="submit" name="submit" value="Submit">
             </fieldset>
         </form>
     </div>
