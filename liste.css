@@ -80,17 +80,30 @@ li a:hover {
 .section-content.active {
     display: block;
 }
-.description h1{
-color: #1E5389;
+.section1{
+  display: flex;
 }
-.description {
-  border: 3px solid black;
-  }
-  .description p {
-   font-size: 18px;
-   font-style: italic;
-   font-weight: bold;
-    }
+.detail2{
+ 
+  width: 60%;
+  margin-top: 5%;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  color: black;
+  border-radius: 15px 50px;
+  
+}
+.detail1{
+  width: 30%;
+  margin-top: 5%;
+  color: black;
+  border-radius: 15px 50px;
+  margin-left: 5%;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.liste{
+  background-color: #d0d8e0;
+}
+
     #upt{
       margin-left: 15%;
     }
@@ -104,4 +117,41 @@ color: #1E5389;
       text-decoration: none;
       font-size: 18px;
       font-style: italic;
+    }
+    .description{
+      margin-left: 3%;
+      font-size: 25px;
+      font-style: italic;
+    }
+    .description h1{
+      background-color: #1E5389;
+      color: white;
+    }
+    .Etique h1{
+      background-color: rgb(161, 31, 31);
+      color: white;
+    }
+    .Etique{
+      font-size: 25px;
+      font-style: italic;
+    }
+    .createur{
+      margin-left: 10%;
+    }
+    .Asign{
+      margin-left: 20%;
+    }
+    .statut{
+      margin-left: 3%;
+     
+    }
+    .statut h1{
+      background-color: #1e538965;
+    }
+    .date h1{
+      background-color: #1e538965;
+    }
+    .date{
+     margin-left: 10%;
+     margin-top: 5%;
     }

@@ -48,14 +48,6 @@ if(isset($_POST["submit"])){
 
 ?>;
 
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,9 +118,7 @@ if(isset($_POST["submit"])){
             }
 
             ?>
-              
-              
-                <!-- Ajoutez d'autres options ici si nécessaire -->
+<!-- Ajoutez d'autres options ici si nécessaire -->
             </select>
                 </div>
                
