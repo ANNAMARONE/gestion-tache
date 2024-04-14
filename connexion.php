@@ -2,48 +2,75 @@
 require_once('config.php');
 
 class Connexion extends Database {
-    function authentification() {
-        // Démarrer la session
-        session_start();
+    function connecter($username, $password) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $username = $_POST['Email'];
+            $password = $_POST['MotDePasse'];
 
-        // Vérifier si l'utilisateur est déjà connecté, le rediriger vers la page d'accueil si c'est le cas
-        if(isset($_SESSION['utilisateur_id'])) {
-            header("Location: accueil.php");
-            exit;
-        }
+            // Connectez-vous à la base de données
+            $this->conn;
 
-        // Vérifier si le formulaire de connexion a été soumis
-        if(isset($_POST["connecter"])) {
-            // Récupérer les données du formulaire
-            $email = $_POST["Email"];
-            $motDePasse = $_POST["MotDePasse"];
-            
-            // Validation des données
-            if(empty($email) || empty($motDePasse)) {
-                $erreur = "Veuillez saisir votre adresse e-mail et votre mot de passe.";
+            $sql = "SELECT * FROM Utilisateurs WHERE Email = :Email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['Email' => $username]);
+            $user = $stmt->fetch();
+
+            if ($user && password_verify($password, $user['MotDePasse'])) {
+                session_start();
+                $_SESSION['Id'] = $user['Id'];
+                header('Location: read.php');
+                exit();
             } else {
-                // Vérifier les informations d'identification dans la base de données
-                $stmt = $this->conn->prepare("SELECT id, MotDePasse FROM Utilisateurs WHERE Email = :Email");
-                $stmt->execute(array(':Email' => $email));
-                $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
-                
-                // Vérifier si l'utilisateur existe et si le mot de passe est correct
-                if($utilisateur && password_verify($motDePasse, $utilisateur['MotDePasse'])) {
-                    // Authentification réussie, créer une session pour l'utilisateur
-                    $_SESSION['utilisateur_id'] = $utilisateur['id'];
-                    // Rediriger vers la page d'accueil
-                    header("Location: accueil.php");
-                    exit;
-                } else {
-                    // Informer l'utilisateur que les informations d'identification sont incorrectes
-                    $erreur = "Adresse e-mail ou mot de passe incorrect.";
-                }
+                $message = 'Identifiants invalides';
             }
         }
+
+        return $message ?? '';
     }
 }
 
-// Utilisation de la classe Connexion
-$connexion = new Connexion();
-$connexion->authentification();
+// Créez une instance de la classe Connexion
+$db = new Connexion();
 
+// Exécutez la méthode connecter pour tenter une connexion
+$message = $db->connecter($_POST['Email'] ?? '', $_POST['MotDePasse'] ?? '');
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <style>
+        /* Votre CSS ici */
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Connexion</h2>
+
+    <?php if (!empty($message)): ?>
+        <p style="color:red"><?= $message ?></p>
+    <?php endif; ?>
+
+    <form action="connexion.php" method="post">
+        <div>
+            <label for="username">Nom d'utilisateur:</label>
+            <input type="text" id="username" name="Email" required>
+        </div>
+
+        <div>
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="MotDePasse" required>
+        </div>
+
+        <div>
+            <input type="submit" value="Se connecter">
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

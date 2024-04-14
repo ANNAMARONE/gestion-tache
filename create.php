@@ -95,8 +95,10 @@ else {
 }
 
     }
+  
+    ?>
     
-?>
+
 
 
 
@@ -112,7 +114,7 @@ else {
 <body>
 <nav>
   <a href="create.php" class="nav-item is-active" data-active-color="orange" data-target="Home">Accueil</a>
-  <a href="#" class="nav-item" data-active-color="green" data-target="About">Tâche</a>
+  <a href="read.php" class="nav-item" data-active-color="green" data-target="About">Tâche</a>
   <a href="createtache.php" class="nav-item" data-active-color="blue" data-target="Testimonials">Ajouter une Tâche</a>
   <a href="#" class="nav-item" data-active-color="rebeccapurple" data-target="Contact">Contact</a>
   <span class="nav-indicator"></span>
@@ -125,6 +127,7 @@ else {
 </div>
 <div class="créercompt">
 <div class="form1">
+    
 <form action="" method="POST">
     <fieldset>
         <h1 class="compt">JE CRÉER MON COMPTE</h1>
@@ -173,9 +176,48 @@ else {
     </fieldset>
 </form>
 </div>
+<?php
+require_once('config.php');
+
+class Connexion extends Database {
+    function connecter($username, $password) {
+        if ($_POST['connecter']) {
+            $username = $_POST['Email'];
+            $password = $_POST['MotDePasse'];
+
+            // Connectez-vous à la base de données
+            $this->conn;
+
+            $sql = "SELECT * FROM Utilisateurs WHERE Email = :Email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['Email' => $username]);
+            $user = $stmt->fetch();
+
+            if ($user && password_verify($password, $user['MotDePasse'])) {
+                session_start();
+                $_SESSION['Id'] = $user['Id'];
+                header('Location:read.php');
+                exit();
+            } else {
+                $message = 'Identifiants invalides';
+            }
+        }
+
+        return $message ?? '';
+    }
+}
+
+// Créez une instance de la classe Connexion
+$db = new Connexion();
+
+// Exécutez la méthode connecter pour tenter une connexion
+$message = $db->connecter($_POST['Email'] ?? '', $_POST['MotDePasse'] ?? '');
+?>
 <div class="form3">
     <h2>AUTHENFICATION</h2>
-    <?php if(isset($erreur)) { echo '<p>' . $erreur . '</p>'; } ?>
+    <?php if (!empty($message)): ?>
+        <p style="color:red"><?= $message ?></p>
+    <?php endif; ?>
 <form  method="post">
 
   <div class="containers">
