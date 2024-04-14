@@ -1,59 +1,31 @@
 <?php
-require_once('config.php');
-class Delete extends Database{
-function readTacheDetail($id){
-   
-    $sql="SELECT * FROM Taches JOIN Utilisateurs ON Utilisateurs.Id=Createur WHERE Assignee = :Id  ";
-    $stmt=$this->conn->prepare($sql);
-    $stmt->bindParam(':Id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $détail=$stmt->fetch();
-    return $détail;
-}  
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
+require_once('config.php');
+class Delete extends Database {
+    public function delete($id) {
+        try {
+            $sql = "DELETE FROM Taches WHERE Id = :Id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':Id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            // Suppression réussie, redirigez vers une autre page
+            header('location: read.php');
+            exit(); // Assurez-vous de terminer l'exécution du script après la redirection
+        } catch(PDOException $e) {
+            echo 'Une erreur est survenue : ' . $e->getMessage();
+        }
+        
+    }
 }
-$id = $_GET['Id'];
-$db = new Delete();
-$détail = $db->readTacheDetail($id);
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="liste.css">
-    <title>liste des tâches </title>
-</head>
-<body>
-<table id="customers">
-            <thead>
-           
-                <tr>
-                    <th>Description</th>
-                    <th>Tâche</th>
-                    <th>Assigné à</th>
-                    <th>Statut</th>
-                    <th>Priorite</th>
-                    <th>Date de cration</th>
-                    <th>Date de Limite</th>
-                </tr>
-            </thead>
-            <tbody>
-            
-   
-                <tr>
-                   <td><?=$détail['Description'] ?></td>
-                    <td><?= $détail['Titre']?></td>
-                    <td><?= $détail['Prenom']?><?= $détail['Nom']?></td>
-                    <td><?=$détail['Statut']?></td>
-                    <td><?= $détail['Priorite']?></td>
-                    <td><?=$détail['DateCreation']?></td>
-                    <td><?= $détail['DateLimite']?></td>
-                </tr>
-               
-            </tbody>
-           </table>              
-         </body>
-</html>
-    
-   
+
+// Vérifiez si l'ID est fourni dans l'URL
+if(isset($_GET['Id'])) {
+    $id = $_GET['Id'];
+    $db = new Delete();
+    $db->delete($id);
+} else {
+    echo "Erreur : l'ID est manquant.";
+}

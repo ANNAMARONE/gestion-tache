@@ -80,3 +80,28 @@ li a:hover {
 .section-content.active {
     display: block;
 }
+.description h1{
+color: #1E5389;
+}
+.description {
+  border: 3px solid black;
+  }
+  .description p {
+   font-size: 18px;
+   font-style: italic;
+   font-weight: bold;
+    }
+    #upt{
+      margin-left: 15%;
+    }
+    #voire{
+      background-color: #1E5389;
+      color: #ddd;
+      padding: 10px;
+
+    }
+    .view a{
+      text-decoration: none;
+      font-size: 18px;
+      font-style: italic;
+    }
